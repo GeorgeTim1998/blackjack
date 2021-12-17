@@ -4,7 +4,7 @@ class Cards
   CARD_SUITS = %w[<3 <> + ^].freeze
   CARD_SUITS_AMOUNT = 4
 
-  attr_writer :card
+  attr_reader :card
 
   def initialize
     @card = designate
