@@ -5,7 +5,11 @@ class Bank
     @account = 100
   end
 
-  def bet
-    @account -= 10
+  def deposit
+    @account -= 10 if possible?
+  end
+
+  def possible?
+    @account >= 10
   end
 end
