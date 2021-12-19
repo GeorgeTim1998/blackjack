@@ -36,3 +36,6 @@ Style/Documentation:
 
 # Lint/MissingSuper:
 #   Enabled: false
+
+Lint/SymbolConversion:
+  Enabled: false
