@@ -11,12 +11,8 @@ class Blackjack
   end
 
   def value_player_cards(player)
-    value_cards(player.cards)
-  end
-
-  def value_cards(cards_obj)
     sum = 0
-    cards_obj.each { |card_obj| sum += COUNT_POINTS[card_obj.card[0].to_sym] }
+    player.cards.each { |card_obj| sum += COUNT_POINTS[card_obj.card[0].to_sym] }
     sum
   end
 end
