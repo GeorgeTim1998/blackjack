@@ -14,7 +14,7 @@ class Blackjack
     @dealer_points = value_cards(@dealer)
   end
 
-  def value_cards_no_ace(player)
+  def value_usual(player)
     sum = 0
     player.cards.each { |card_obj| sum += COUNT_POINTS[card_obj.card[0].to_sym] }
     sum
@@ -33,12 +33,13 @@ class Blackjack
   end
 
   def value_cards(player)
-    aces = how_many_aces? player.cards
-    case aces
+    case how_many_aces? player.cards
     when 0
-      value_cards_no_ace(player)
-    when 1 || 2
-      value_1_or_2_aces(player)
+      value_usual(player)
+    when 1
+      value_more_card_then_aces(player)
+    when 2
+      value_cards_2_aces(player)
     else
       value_cards_3_aces
     end
@@ -48,16 +49,12 @@ class Blackjack
     if player.cards.length == 2
       11 + 1
     else
-      two_aces_3_cards_if(player)
+      value_more_card_then_aces(player)
     end
   end
 
-  def value_cards_3_aces
-    11 + 1 + 1
-  end
-
-  def value_1_or_2_aces(player)
-    min_value = value_cards_no_ace(player)
+  def value_more_card_then_aces(player)
+    min_value = value_usual(player)
     max_value = min_value + 10
 
     if max_value > WINING_POINTS
@@ -65,5 +62,9 @@ class Blackjack
     else
       max_value
     end
+  end
+
+  def value_cards_3_aces
+    11 + 1 + 1
   end
 end
