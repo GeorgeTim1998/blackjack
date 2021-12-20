@@ -68,14 +68,6 @@ class Blackjack
     player.points = value_cards(player)
   end
 
-  def stats # delete later
-    puts @player.cards.inspect.red
-    puts "#{@player.points}".red
-
-    puts @dealer.cards.inspect.blue
-    puts "#{@dealer.points}".blue
-  end
-
   def dealer_action
     if @dealer.points >= DEALER_ACTION
       @dealer.stand
