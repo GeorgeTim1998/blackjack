@@ -20,11 +20,11 @@ class Blackjack
     sum
   end
 
-  def ace?(cards)
-    ace_present = false
-    cards.each { |card_obj| ace_present = true if card_obj.card[0] == 'T' }
-    ace_present
-  end
+  # def ace?(cards)
+  #   ace_present = false
+  #   cards.each { |card_obj| ace_present = true if card_obj.card[0] == 'T' }
+  #   ace_present
+  # end
 
   def how_many_aces?(cards)
     ace_amount = 0
