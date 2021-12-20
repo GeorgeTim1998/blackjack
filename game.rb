@@ -8,10 +8,10 @@ class Blackjack
 
   def initialize(name)
     @player = Player.new(name)
-    @player_points = value_cards(@player)
+    @player.points = value_cards(@player)
 
     @dealer = Player.new('Dealer')
-    @dealer_points = value_cards(@dealer)
+    @dealer.points = value_cards(@dealer)
   end
 
   def value_usual(player)
@@ -19,12 +19,6 @@ class Blackjack
     player.cards.each { |card_obj| sum += COUNT_POINTS[card_obj.card[0].to_sym] }
     sum
   end
-
-  # def ace?(cards)
-  #   ace_present = false
-  #   cards.each { |card_obj| ace_present = true if card_obj.card[0] == 'T' }
-  #   ace_present
-  # end
 
   def how_many_aces?(cards)
     ace_amount = 0
@@ -66,5 +60,18 @@ class Blackjack
 
   def value_cards_3_aces
     11 + 1 + 1
+  end
+
+  def hit(player)
+    player.hit if player.cards.length < 3
+    player.points = value_cards(player)
+  end
+
+  def stats # delete later
+    puts @player.cards.inspect.red
+    puts "#{@player.points}".red
+
+    puts @dealer.cards.inspect.blue
+    puts "#{@dealer.points}".blue
   end
 end
