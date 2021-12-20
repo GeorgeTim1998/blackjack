@@ -9,6 +9,10 @@ class Bank
     @account -= 10 if possible?
   end
 
+  def deposit_winnings(money)
+    @account += money
+  end
+
   def possible?
     @account >= 10
   end

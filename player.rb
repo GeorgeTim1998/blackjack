@@ -13,11 +13,19 @@ class Player
     @cards << Deck.new
   end
 
+  def bet
+    @money.deposit
+  end
+
   def stand
     True
   end
 
   def open_cards
     True
+  end
+
+  def claim_winning(money)
+    @money.deposit_winnings(money)
   end
 end
