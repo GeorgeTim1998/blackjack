@@ -20,6 +20,7 @@ class Interface
 
   def play
     game_body
+    endgame(@game.player, @game.dealer)
     if @game.tie?
       puts "It's a tie!"
     else
@@ -41,6 +42,7 @@ class Interface
       # puts ending_game?
       break if ending_game?
 
+      puts "\nDealer acts:".yellow
       @game.dealer_action
       put_game_stats(@game.player, @game.dealer)
     end
@@ -77,7 +79,7 @@ class Interface
       @game.hit(player)
       put_game_stats(player, @game.dealer)
     when '2'
-      endgame(player, @game.dealer)
+      @end_game = 1
     else
       warning!
     end
@@ -91,14 +93,13 @@ class Interface
   end
 
   def endgame(player, dealer)
+    puts "\nGame is finished".blue
     puts "Your cards: #{player.cards.inspect}".red
     puts "Points: #{player.points}".red
 
     puts "Dealer cards: #{dealer.cards.inspect}".yellow
     puts "Points: #{dealer.points}".yellow
     # @game.who_won?(player, dealer)
-
-    @end_game = 1
   end
 
   def warning!

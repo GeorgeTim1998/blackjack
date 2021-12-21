@@ -88,7 +88,6 @@ class Blackjack
   end
 
   def dealer_action
-    puts 'Dealer acts:'.yellow
     if @dealer.points >= DEALER_ACTION
       @dealer.stand
     else
