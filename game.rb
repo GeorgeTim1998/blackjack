@@ -1,6 +1,6 @@
 require_relative 'require'
 class Blackjack
-  attr_reader :player, :dealer, :player_points, :dealer_points
+  attr_reader :player, :dealer
 
   COUNT_POINTS = { 'T': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10,
                    'J': 10, 'Q': 10, 'K': 10 }.freeze
@@ -80,7 +80,7 @@ class Blackjack
   end
 
   def tie?
-    @player_points == @dealer_points && @player_points <= 21
+    (@player.points == @dealer.points) && (@player.points <= WINING_POINTS)
   end
 
   def three_cards_each?(player, dealer)

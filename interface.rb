@@ -20,7 +20,7 @@ class Interface
     if @game.tie?
       puts "It's a tie!"
     else
-      puts "#{@game.who_won?} won!"
+      puts "#{@game.who_won?(@game.player, @game.dealer)} won!"
     end
   end
 
@@ -31,14 +31,12 @@ class Interface
 
   def game_body
     loop do
-      if @game.three_cards_each?(@game.player, @game.dealer)
-        break
-      else
-        player_action
-        break if ending_game?
+      break if ending_game?
 
-        @game.dealer_action
-      end
+      player_action
+      break if ending_game?
+
+      @game.dealer_action
     end
   end
 
@@ -95,7 +93,7 @@ class Interface
   end
 
   def action_puts
-    puts 'You can perform several actions:'.blue
+    puts "\nYou can perform several actions:".blue
     puts 'Stand: 0'
     puts 'Hit: 1'
     puts 'Open cards: 2'
