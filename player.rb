@@ -21,10 +21,6 @@ class Player
     true
   end
 
-  def open_cards
-    true
-  end
-
   def claim_money(money)
     @money.deposit_money(money)
   end
