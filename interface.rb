@@ -7,12 +7,15 @@ class Interface
   def initialize
     puts 'Commensing the Blackjack game...'.green
     puts 'Enter your name:'.blue
+    # action = 'duda'
     action = interface_gets
     @end_game = 0
     @game = Blackjack.new(action)
     put_game_stats(@game.player, @game.dealer)
 
     play
+
+    initialize if try_again?
   end
 
   def play
@@ -31,12 +34,27 @@ class Interface
 
   def game_body
     loop do
+      # puts ending_game?
       break if ending_game?
 
       player_action
+      # puts ending_game?
       break if ending_game?
 
       @game.dealer_action
+      put_game_stats(@game.player, @game.dealer)
+    end
+  end
+
+  def try_again?
+    puts 'Wanna play again? y/n'
+    action = interface_gets
+
+    case action
+    when 'y'
+      true
+    when 'n'
+      false
     end
   end
 
@@ -47,6 +65,7 @@ class Interface
   def player_action
     action_puts
     action = interface_gets
+    # action = 1
     switch_player_action(action, @game.player)
   end
 
@@ -77,7 +96,7 @@ class Interface
 
     puts "Dealer cards: #{dealer.cards.inspect}".yellow
     puts "Points: #{dealer.points}".yellow
-    @game.who_won?(player, dealer)
+    # @game.who_won?(player, dealer)
 
     @end_game = 1
   end

@@ -72,7 +72,7 @@ class Blackjack
     player_sorted = [player, dealer].sort_by { |obj| obj.points }
     if player_sorted[1].points <= 21
       player_sorted[1].name
-    elsif player_sorted[0] <= 21
+    elsif player_sorted[0].points <= 21
       player_sorted[0].name
     else
       'Nobody'
@@ -88,11 +88,11 @@ class Blackjack
   end
 
   def dealer_action
+    puts 'Dealer acts:'.yellow
     if @dealer.points >= DEALER_ACTION
       @dealer.stand
     else
       hit(@dealer)
-      @dealer.open_cards
     end
   end
 end
