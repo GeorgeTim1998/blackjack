@@ -1,6 +1,6 @@
 require_relative 'require'
 class Player
-  attr_reader :cards, :money
+  attr_reader :cards, :money, :name
   attr_accessor :points
 
   def initialize(name)
@@ -18,11 +18,11 @@ class Player
   end
 
   def stand
-    True
+    true
   end
 
   def open_cards
-    True
+    true
   end
 
   def claim_winning(money)

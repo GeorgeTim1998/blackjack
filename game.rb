@@ -68,6 +68,25 @@ class Blackjack
     player.points = value_cards(player)
   end
 
+  def who_won?(player, dealer)
+    player_sorted = [player, dealer].sort_by { |obj| obj.points }
+    if player_sorted[1].points <= 21
+      player_sorted[1].name
+    elsif player_sorted[0] <= 21
+      player_sorted[0].name
+    else
+      'Nobody'
+    end
+  end
+
+  def tie?
+    @player_points == @dealer_points && @player_points <= 21
+  end
+
+  def three_cards_each?(player, dealer)
+    player.cards.length == 3 && dealer.cards.length == 3
+  end
+
   def dealer_action
     if @dealer.points >= DEALER_ACTION
       @dealer.stand

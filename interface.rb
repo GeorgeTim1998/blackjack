@@ -1,18 +1,27 @@
 require_relative 'require'
 
 class Interface
-  attr_accessor :action
+  attr_accessor :action, :end_game
   attr_reader :game
 
   def initialize
     puts 'Commensing the Blackjack game...'.green
     puts 'Enter your name:'.blue
     action = interface_gets
-
+    @end_game = 0
     @game = Blackjack.new(action)
-    put_game_stats
+    put_game_stats(@game.player, @game.dealer)
 
+    play
+  end
+
+  def play
     game_body
+    if @game.tie?
+      puts "It's a tie!"
+    else
+      puts "#{@game.who_won?} won!"
+    end
   end
 
   def interface_gets
@@ -21,29 +30,37 @@ class Interface
   end
 
   def game_body
-    action_puts
     loop do
-      if tree_cards_each?(@game.player, @game.dealer)
-        put_endgame_stats(@game.player, @game.dealer)
-        who_won?(@game.player.points, @game.dealer.points)
+      if @game.three_cards_each?(@game.player, @game.dealer)
         break
       else
-        action = interface_gets
-        switch_player_action(action)
+        player_action
+        break if ending_game?
+
+        @game.dealer_action
       end
     end
   end
 
-  def switch_player_action(action)
+  def ending_game?
+    @game.three_cards_each?(@game.player, @game.dealer) || @end_game == 1
+  end
+
+  def player_action
+    action_puts
+    action = interface_gets
+    switch_player_action(action, @game.player)
+  end
+
+  def switch_player_action(action, player)
     case action
-    when 0
-      @game.dealer_action
-    when 1
-      @game.hit(@game.player)
-      put_game_stats(@game.player, @game.dealer)
-      @game.dealer_action
-    when 3
-      put_endgame_stats(@game.player, @game.dealer)
+    when '0'
+      player.stand
+    when '1'
+      @game.hit(player)
+      put_game_stats(player, @game.dealer)
+    when '2'
+      endgame(player, @game.dealer)
     else
       warning!
     end
@@ -56,22 +73,15 @@ class Interface
     mask_dealer_cards(dealer.cards)
   end
 
-  def put_endgame_stats(player, dealer)
+  def endgame(player, dealer)
     puts "Your cards: #{player.cards.inspect}".red
     puts "Points: #{player.points}".red
 
-    puts "Your cards: #{dealer.cards.inspect}".yellow
+    puts "Dealer cards: #{dealer.cards.inspect}".yellow
     puts "Points: #{dealer.points}".yellow
+    @game.who_won?(player, dealer)
 
-    who_won?
-  end
-
-  def tree_cards_each?(player, dealer)
-    player.cards.length == 3 && dealer.cards.length == 3
-  end
-  
-  def who_won?(player_points, dealer_points)
-    
+    @end_game = 1
   end
 
   def warning!
