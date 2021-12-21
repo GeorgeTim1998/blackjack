@@ -9,7 +9,7 @@ class Bank
     @account -= 10 if possible?
   end
 
-  def deposit_winnings(money)
+  def deposit_money(money)
     @account += money
   end
 

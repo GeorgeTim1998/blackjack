@@ -25,7 +25,7 @@ class Player
     true
   end
 
-  def claim_winning(money)
-    @money.deposit_winnings(money)
+  def claim_money(money)
+    @money.deposit_money(money)
   end
 end

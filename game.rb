@@ -69,11 +69,13 @@ class Blackjack
   end
 
   def who_won?(player, dealer)
-    player_sorted = [player, dealer].sort_by { |obj| obj.points }
+    player_sorted = [player, dealer].sort_by(&:points)
     if player_sorted[1].points <= 21
       player_sorted[1].name
+      claim_winnings(player_sorted[1])
     elsif player_sorted[0].points <= 21
       player_sorted[0].name
+      claim_winnings(player_sorted[0])
     else
       'Nobody'
     end
@@ -93,5 +95,14 @@ class Blackjack
     else
       hit(@dealer)
     end
+  end
+
+  def return_bets(player, dealer)
+    player.claim_money(10)
+    dealer.claim_money(10)
+  end
+
+  def claim_winnings(player)
+    player.claim_money(20)
   end
 end

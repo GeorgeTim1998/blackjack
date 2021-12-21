@@ -22,6 +22,7 @@ class Interface
     endgame_stats(@game.player, @game.dealer)
     if @game.tie?
       puts "\nIt's a tie!"
+      return_bets(@game.player, @game.dealer)
     else
       puts "\n#{@game.who_won?(@game.player, @game.dealer)} won!"
     end
