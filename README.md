@@ -35,6 +35,8 @@ Studing Ruby
 создать новую ветку и скопировать туда данные из старой
 <!-- git branch -d <branch-name> -->
 удалить локалльную ветку
+<!-- git switch --orphan <new branch> -->
+сделать пустую ветку
 
 ## Shortcuts
 
