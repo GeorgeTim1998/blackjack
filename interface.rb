@@ -7,7 +7,6 @@ class Interface
   def initialize
     puts 'Commensing the Blackjack game...'.green
     puts 'Enter your name:'.blue
-    # action = 'duda'
     action = interface_gets
     @end_game = 0
     @game = Blackjack.new(action)
@@ -20,11 +19,11 @@ class Interface
 
   def play
     game_body
-    endgame(@game.player, @game.dealer)
+    endgame_stats(@game.player, @game.dealer)
     if @game.tie?
-      puts "It's a tie!"
+      puts "\nIt's a tie!"
     else
-      puts "#{@game.who_won?(@game.player, @game.dealer)} won!"
+      puts "\n#{@game.who_won?(@game.player, @game.dealer)} won!"
     end
   end
 
@@ -35,11 +34,9 @@ class Interface
 
   def game_body
     loop do
-      # puts ending_game?
       break if ending_game?
 
       player_action
-      # puts ending_game?
       break if ending_game?
 
       puts "\nDealer acts:".yellow
@@ -67,7 +64,6 @@ class Interface
   def player_action
     action_puts
     action = interface_gets
-    # action = 1
     switch_player_action(action, @game.player)
   end
 
@@ -92,14 +88,13 @@ class Interface
     mask_dealer_cards(dealer.cards)
   end
 
-  def endgame(player, dealer)
+  def endgame_stats(player, dealer)
     puts "\nGame is finished".blue
     puts "Your cards: #{player.cards.inspect}".red
     puts "Points: #{player.points}".red
 
     puts "Dealer cards: #{dealer.cards.inspect}".yellow
     puts "Points: #{dealer.points}".yellow
-    # @game.who_won?(player, dealer)
   end
 
   def warning!
