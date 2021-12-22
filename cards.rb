@@ -19,11 +19,6 @@ class Deck
     card
   end
 
-  def heh
-    @@designated_cards.each { |item| puts(item[0] + item[1]) }
-    puts @@designated_cards.length
-  end
-
   def generate
     [CARDS[rand(CARDS.length)], CARD_SUITS[rand(CARD_SUITS.length)]]
   end
