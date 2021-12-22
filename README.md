@@ -46,6 +46,8 @@ cntr+shift+K
 cntr+shift+arrow 
 <!-- Add cursor up/down -->
 shift+alt+arrow #esc to cansel
+<!-- Вкладку перемещать влево вправо -->
+cntr+shift+page up/down
 
 ## Lesson 1. Foundation of object OOP
 
