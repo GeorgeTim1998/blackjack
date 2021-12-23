@@ -7,11 +7,6 @@ class Deck
 
   attr_reader :card
 
-  # def initialize
-  #   @card = designate
-  #   @@designated_cards << @card
-  # end
-
   def designate
     card = generate
     card = generate while @@designated_cards.include? card
