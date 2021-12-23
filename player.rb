@@ -3,14 +3,14 @@ class Player
   attr_reader :cards, :money, :name
   attr_accessor :points
 
-  def initialize(name)
+  def initialize(name, deck)
     @name = name
-    @cards = [Deck.new, Deck.new]
+    @cards = [deck.designate, deck.designate]
     @money = Bank.new
   end
 
-  def hit
-    @cards << Deck.new
+  def hit(deck)
+    @cards << deck.designate
   end
 
   def bet

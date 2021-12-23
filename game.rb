@@ -8,10 +8,12 @@ class Blackjack
   DEALER_ACTION = 17
 
   def initialize(name)
-    @player = Player.new(name)
+    @deck = Deck.new
+
+    @player = Player.new(name, @deck)
     @player.points = value_cards(@player)
 
-    @dealer = Player.new('Dealer')
+    @dealer = Player.new('Dealer', @deck)
     @dealer.points = value_cards(@dealer)
   end
 
@@ -64,7 +66,7 @@ class Blackjack
   end
 
   def hit(player)
-    player.hit if player.cards.length < 3
+    player.hit(@deck) if player.cards.length < 3
     player.points = value_cards(player)
   end
 
