@@ -24,5 +24,5 @@ Ruby: 3.0.3
 
 ## How to launch
 - Clone the repository `git clone https://github.com/GeorgeTim1998/blackjack.git`
-- `cd blackjack`
+- `cd blackjack/`
 - `ruby game.rb`
